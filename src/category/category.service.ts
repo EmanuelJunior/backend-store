@@ -54,6 +54,8 @@ export class CategoryService {
   async update(id: string, { name }: UpdateCategoryDto) {
 
     try {
+      if ( name !== '' ) throw new BadRequestException('Es obligatorio el nombre');
+
       const queryBuilder = await this.categoryRepository
         .createQueryBuilder()
         .update(Category)
